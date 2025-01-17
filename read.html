@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💌</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Personalized Motivational Message</h1>
+
+    <div id="hello" class="hidden"></div>
+    <div id="from" class="hidden"></div>
+    <div id="problem" class="hidden"></div>
+    <div id="message" class="hidden"></div>
+    <div id="compliment" class="hidden"></div>
+    <div id="encouragement" class="hidden"></div>
+    <div id="thanks" class="hidden"></div>
+    <div id="refer" class="hidden"></div>
+    <div class="hidden">Go to *URL HERE* to make your own.</div>
+    <button id="continueButton">Continue</button>
+    
+
+    <script>
+        // JavaScript to read URL parameters and display the message
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name') || 'there';
+        const sender = urlParams.get('sender') || 'A friend';
+        const problem = urlParams.get('problem') || 'life can be tough sometimes';
+        const message = urlParams.get('message') || 'I believe in you and I know you can do it.';
+        const compliment = urlParams.get('compliment') || 'you\'re a star';
+        const thanks = urlParams.get('thanks') || 'making the world a better place';
+        const encouragement = urlParams.get('encouragement') || 'keep being you';
+        if (urlParams.has('refer')) {
+            document.getElementById('refer').innerText = `Want to pass this message on? You are part of a chain of ${urlParams.get('refer')} messages!`;
+        } else {
+            document.getElementById('refer').innerText = `Want to pass this message on? You could start a chain of messages!`;
+        }
+        
+        document.getElementById('hello').innerText = `Hi, ${name}.`;
+        document.getElementById('from').innerText = `${sender} just wanted to say...`;
+        document.getElementById('problem').innerText = `I know ${problem}, but...`;
+        document.getElementById('message').innerText = message;
+        document.getElementById('thanks').innerText = `Thanks for ${thanks}!`;
+        document.getElementById('compliment').innerText = `Remember, ${compliment}...`;
+        document.getElementById('encouragement').innerText = `so ${encouragement}!`;
+        
+
+        let currentParagraph = 0;
+        const paragraphs = document.querySelectorAll('div.hidden');
+        const continueButton = document.getElementById('continueButton');
+
+        continueButton.addEventListener('click', function() {
+            if (currentParagraph < paragraphs.length) {
+                paragraphs[currentParagraph].classList.remove('hidden');
+                currentParagraph++;
+            } else {
+                continueButton.disabled = true; // Disable button when all paragraphs are shown
+            }
+        });
+    </script>
+
+</body>
+</html>
