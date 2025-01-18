@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friend Message</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Friend Message</h1>
+    <div class="container"></div>
+    <p><i>Internet feeling lonely? Send a message to a friend to remind them that you care.</i></p>
+    <div class="hidden">
+        <label for="name">Your Name:</label><br>
+        <input type="text" id="name" placeholder="e.g. Alice">
+    </div>
+
+    <div class="hidden">
+        <label for="sender">Sender's Name:</label><br>
+        <input type="text" id="sender" placeholder="e.g. Bob">
+    </div>
+
+    <div class="hidden">
+        <label for="problem">Problem:</label><br>
+        <input type="text" id="problem" placeholder="e.g. school is stressful">
+    </div>
+
+    <div class="hidden">
+        <label for="message">Message:</label><br>
+        <input type="text" id="message" placeholder="e.g. you can do it!">
+    </div>
+
+    <div class="hidden">
+        <label for="compliment">Compliment:</label><br>
+        <input type="text" id="compliment" placeholder="e.g. you're great at coding">
+    </div>
+
+    <div class="hidden">
+        <label for="thanks">Thanks For:</label><br>
+        <input type="text" id="thanks" placeholder="e.g. helping me with my homework">
+    </div>
+
+    <div class="hidden">
+        <label for="encouragement">Encouragement:</label><br>
+        <input type="text" id="encouragement" placeholder="e.g. keep being awesome">
+    </div>
+
+    <button id="generateButton" class="hidden">Generate URL</button>
+
+    <div id="generatedUrl"></div>
+
+    <div class="hidden"><i>pssst! don't like it? try again as many times as you like.</i></div>
+    <button id="continueButton">Continue</button>
+    <footer>
+        Made with ❤️ by <a href="https://github.com/isobel-p">isobel-p</a>
+    </footer>
+    <script>
+        const container = document.querySelector('.container');
+        document.getElementById('generateButton').addEventListener('click', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const params = {
+                name: document.getElementById('name').value,
+                sender: document.getElementById('sender').value,
+                problem: document.getElementById('problem').value,
+                message: document.getElementById('message').value,
+                compliment: document.getElementById('compliment').value,
+                thanks: document.getElementById('thanks').value,
+                encouragement: document.getElementById('encouragement').value,
+                refer: urlParams.get('refer')
+            };
+
+            const baseUrl = 'https://isobel-p.loves-being-a.dev/friend-message/read.html'; // Change this to your actual URL
+            const queryString = Object.keys(params)
+                .filter(key => params[key])
+                .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+                .join('&');
+
+            const generatedUrl = `${baseUrl}?${queryString}`;
+
+            document.getElementById('generatedUrl').innerHTML = `Generated URL: <a href="${generatedUrl}">${generatedUrl}</a>`;
+        });
+        
+        let currentParagraph = 0;
+        const paragraphs = document.querySelectorAll('div.hidden, #generateButton.hidden');
+        const continueButton = document.getElementById('continueButton');
+
+        continueButton.addEventListener('click', function() {
+            if (currentParagraph < paragraphs.length) {
+                paragraphs[currentParagraph].classList.remove('hidden');
+                currentParagraph++;
+            } else {
+                continueButton.disabled = true; // Disable button when all paragraphs are shown
+            }
+        });
+    </script>
+</body>
+</html>
