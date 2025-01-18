@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+body {
+    font-family: 'Space Mono', monospace;
+    text-align: center;
+    background: rgb(2,0,36);
+    background: white;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background-color: black;
+    color: white;
+}
+
+h1 {
+    text-align: center;
+    font-size: 100px;
+    color: rgb(255, 77, 163);
+    margin-top: 300px;
+    font-family: "Space Mono", monospace;
+}
+
+label {
+    display: block;
+    text-align: center;
+    width: 40%;
+    margin: 0 auto;
+}
+
+input {
+    font-family: "Space Mono", monospace;
+    font-size: 10px;
+    font-style: italic;
+    text-align: center;
+    border-color: rgb(255, 77, 163);
+    border-radius: 20px;
+    width: 25%;
+    display: block;
+    margin: 0 auto;
+    transition: width 0.5s;
+}
+
+input:hover {
+    width: 75%;
+}
+
+button {
+    font-family: "Space Mono", monospace;
+    font-size: 10px;
+    font-style: italic;
+    border-color: rgb(255, 77, 163);
+    border-radius: 20px;
+    width: 25%;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 5px;
+    transition: width 0.5s;
+    display: block;
+    text-align: center;
+}
+
+#generatedUrl {
+    width:100%;
+    background-color: rgba(255, 77, 163, 0.5);
+    margin-left:auto;
+}
+
+footer {
+    margin-top:100px;
+    margin-bottom: 300px;
+}
+@keyframes shape {
+    from {
+        border-radius: 32% 75% 21% 79% / 70% 25% 75% 25%;
+    }
+
+    to {
+        border-radius: 79% 21% 39% 61% / 30% 68% 32% 70%;
+    }
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    box-shadow: inset 1em 1em 15px rgba(255, 77, 163, 0.3);
+    background: linear-gradient(
+        45deg,
+        rgba(255, 155, 203, 0.1) 0%,
+        rgba(255, 155, 203, 0.08) 100%
+    );
+    animation: shape 2s ease-in-out infinite alternate;
+    width: 50%;
+    aspect-ratio: 1.96;
+    height: 0;
+    padding-top: calc(100% / 1.96);
+}
+
+body.dark-mode .container {
+    box-shadow: inset 1em 1em 15px rgba(255, 77, 163, 0.3);
+    background: linear-gradient(
+        45deg,
+        rgba(255, 77, 163, 0.1) 0%,
+        rgba(255, 77, 163, 0.05) 100%
+    );
+}
