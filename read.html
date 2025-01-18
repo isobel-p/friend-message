@@ -4,25 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>💌</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         .hidden {
             display: none;
         }
-    </style>
+    </style> 
 </head>
 <body>
-    <h1>Personalized Motivational Message</h1>
+    <h1 id="hello"></h1>
+    <div class="container"></div>    
+    <div id="messages"></div>
+        <i><div id="from" class="hidden"></div></i>
+        <img src="start.png" class="hidden"><div id="problem" class="hidden"></div>
+        <div id="message" class="hidden"></div>
+        <div id="compliment" class="hidden"></div>
+        <div id="encouragement" class="hidden"></div>
+        <div id="thanks" class="hidden"></div><img src="end.png" class="hidden"><br><br>
+        <div id="refer" class="hidden"></div>
+        <div class="hidden"><a id="referLink" href="#">Click here</a> to make your own.</div>
+    </div>
 
-    <div id="hello" class="hidden"></div>
-    <div id="from" class="hidden"></div>
-    <div id="problem" class="hidden"></div>
-    <div id="message" class="hidden"></div>
-    <div id="compliment" class="hidden"></div>
-    <div id="encouragement" class="hidden"></div>
-    <div id="thanks" class="hidden"></div>
-    <div id="refer" class="hidden"></div>
-    <div class="hidden">Go to *URL HERE* to make your own.</div>
     <button id="continueButton">Continue</button>
+    
     
 
     <script>
@@ -35,12 +39,15 @@
         const compliment = urlParams.get('compliment') || 'you\'re a star';
         const thanks = urlParams.get('thanks') || 'making the world a better place';
         const encouragement = urlParams.get('encouragement') || 'keep being you';
+        let referCount = 1;
         if (urlParams.has('refer')) {
-            document.getElementById('refer').innerText = `Want to pass this message on? You are part of a chain of ${urlParams.get('refer')} messages!`;
+            referCount = parseInt(urlParams.get('refer')) + 1;
+            document.getElementById('refer').innerText = `Want to pass this message on? You are part of a chain of ${referCount} messages!`;
         } else {
             document.getElementById('refer').innerText = `Want to pass this message on? You could start a chain of messages!`;
         }
-        
+        document.getElementById('hello').innerText = `Hi, ${name}.`;
+        document.getElementById('referLink').href = `https://isobel-p.loves-being-a.dev/friend-message/write.html?refer=${referCount}`;
         document.getElementById('hello').innerText = `Hi, ${name}.`;
         document.getElementById('from').innerText = `${sender} just wanted to say...`;
         document.getElementById('problem').innerText = `I know ${problem}, but...`;
@@ -51,7 +58,7 @@
         
 
         let currentParagraph = 0;
-        const paragraphs = document.querySelectorAll('div.hidden');
+        const paragraphs = document.querySelectorAll('.hidden');
         const continueButton = document.getElementById('continueButton');
 
         continueButton.addEventListener('click', function() {
